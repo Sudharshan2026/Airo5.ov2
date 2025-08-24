@@ -13,7 +13,9 @@ import WhyJoinUs from "./components/WhyJoinUs";
 import Results from "./components/Results";
 import Preloader from "./components/Preloader";
 import Prizes from "./components/Prizes";
+import DepartmentGallery from "./components/departmentgallery"; // ✅ Correct import
 
+// Smooth scroll to #hash
 function ScrollToHashElement() {
   const location = useLocation();
 
@@ -34,7 +36,6 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Prevent preloader from showing again
     if (!sessionStorage.getItem("hasLoaded")) {
       setTimeout(() => {
         setLoading(false);
@@ -57,18 +58,22 @@ function App() {
         <main className="flex-grow">
           <Header />
           <Routes>
-            <Route path="/" element={
-              <div>
-                <Hero />
-                <Description />
-                <Prizes />
-                <WhyJoinUs />
-                <CollegeMap />
-                <Footer />
-              </div>
-            } />
-            <Route path="/team" element={<div><OrganizersPage /> <Footer /> </div>} />
-            <Route path="/guidelines" element={<div><Rules /> <Footer /> </div>} />
+            <Route
+              path="/"
+              element={
+                <div>
+                  <Hero />
+                  <Description />
+                  <Prizes />
+                  <WhyJoinUs />
+                  <CollegeMap />
+                  <DepartmentGallery /> {/* ✅ Added here */}
+                  <Footer />
+                </div>
+              }
+            />
+            <Route path="/team" element={<div><OrganizersPage /> <Footer /></div>} />
+            <Route path="/guidelines" element={<div><Rules /> <Footer /></div>} />
             <Route path="/results" element={<Results />} />
           </Routes>
         </main>
